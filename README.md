@@ -1,6 +1,9 @@
-# meme-maker
+# Meme Maker
+![1685809565817.png](https://img.nicholasld.cn/i/2023/06/04/647b699f95ec9.png)
 
-## Project setup
+立即生成自定义文字表情包。
+
+## 项目部署
 ```
 npm install
 ```
@@ -19,6 +22,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
