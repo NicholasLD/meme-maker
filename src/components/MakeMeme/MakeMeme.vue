@@ -1,7 +1,6 @@
 <script>
 import {defineComponent, onMounted, ref} from "vue";
 import {useStore} from "vuex";
-import html2canvas from 'html2canvas';
 
 export default defineComponent({
   name: 'MakeMeme',
@@ -20,7 +19,14 @@ export default defineComponent({
 
     const store = useStore()
     const meme = store.state.memes.find(meme => meme.name === props.name)
-    console.log(meme)
+
+    const beforeImg = {
+      url: meme.url,
+      width: meme.width,
+      height: meme.height,
+      x: meme.x,
+      y: meme.y
+    }
 
     let text = ref("")
 
@@ -28,42 +34,29 @@ export default defineComponent({
       const canvas = document.getElementById('canvas')
       const ctx = canvas.getContext('2d')
       const img = new Image()
-      img.src = meme.url
+      img.src = beforeImg.url
       img.onload = function () {
-        canvas.width = meme.width
-        canvas.height = meme.height
-        ctx.drawImage(img, 0, 0, meme.width, meme.height)
+        canvas.width = beforeImg.width
+        canvas.height = beforeImg.height
+        ctx.drawImage(img, 0, 0, beforeImg.width, beforeImg.height)
         ctx.font = `32px sans-serif`
         const textWidth = ctx.measureText(text.value).width
         let fontSize = 32
-        if (textWidth > meme.width) {
-          fontSize = 32 * meme.width / textWidth
+        if (textWidth > beforeImg.width) {
+          fontSize = 32 * beforeImg.width / textWidth
         }
         ctx.font = `${fontSize}px sans-serif`
         ctx.fillStyle = 'black'
         ctx.textAlign = 'center'
-        ctx.fillText(text.value, meme.x, meme.y)
+        ctx.fillText(text.value, beforeImg.x, beforeImg.y)
+
+        meme.url = canvas.toDataURL('image/png')
       }
-      meme.url = img.src
-    }
 
-    function download() {
-      const canvas = document.getElementById('canvas');
-
-      html2canvas(canvas).then(function (canvas) {
-        // 将 canvas 转换为图片
-        const image = canvas.toDataURL('image/png');
-
-        // 创建一个下载链接并触发下载
-        const link = document.createElement('a');
-        link.href = image;
-        link.download = 'meme.png';
-        link.click();
-      });
     }
 
     return {
-      meme, make, text, download
+      meme, make, text
     }
   }
 })
@@ -72,7 +65,13 @@ export default defineComponent({
 <template>
 <div>
   <el-row>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" hidden="hidden"></canvas>
+    <el-image
+        :src="meme.url"
+        :width="meme.width"
+        :height="meme.height"
+        style="margin: 0 auto"
+    />
   </el-row>
   <el-row style="margin-top: 20px;">
     <el-input
@@ -83,10 +82,6 @@ export default defineComponent({
   </el-row>
   <el-row style="margin-top: 20px;">
     <el-button style="margin: 0 auto" size="large" type="primary" @click="make">立即生成表情</el-button>
-  </el-row>
-
-  <el-row style="margin-top: 20px;">
-    <el-button style="margin: 0 auto" size="default" type="warning" @click="download">下载表情（针对手机）</el-button>
   </el-row>
 
 
