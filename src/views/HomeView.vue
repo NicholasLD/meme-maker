@@ -16,11 +16,14 @@
 </template>
 
 <script>
-
 export default {
   name: 'HomeView',
   components: {
 
+  },
+  setup() {
+    return {
+    }
   }
 }
 </script>
@@ -32,7 +35,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  //background-color: #fff;
   justify-content: flex-start;
 }
 

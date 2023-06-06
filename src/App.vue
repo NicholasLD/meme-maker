@@ -2,32 +2,71 @@
   <el-container>
     <el-aside width="200px" class="hidden-sm-and-down">
       <el-menu
-          default-active="2"
+          router
           class="el-menu-vertical-demo"
+          active-text-color="#ffffff"
       >
-        <el-menu-item id="logo">
-          <h1>Meme Maker</h1>
-        </el-menu-item>
-        <el-menu-item v-for="menu in $router.getRoutes()" :key="menu.id" :index="menu.id" @click="$router.push(menu.path)">
-          <template #title>
-            <ImageIcon :img="menu.meta.icon" :size="20"/>
-            <span>{{ menu.meta.title }}</span>
+        <div id="logo">
+          <span>MEME MAKER</span>
+        </div>
+        <template v-for="r in routes">
+          <template v-if="r.children && r.children.length">
+            <el-sub-menu :key="r.path" :index="r.path">
+              <template #title>
+                <ImageIcon :img="r.meta.icon" :size="20"/>
+                <span> {{r.meta.title}} </span>
+              </template>
+              <div :key="c.path" v-for="c in r.children">
+                <el-menu-item :key="c.path" :index="c.path" @click="routerDo.push(c.path)">
+                  <ImageIcon :img="c.meta.icon" :size="20"/>
+                  <span>{{ c.meta.title }}</span>
+                </el-menu-item>
+              </div>
+            </el-sub-menu>
           </template>
-        </el-menu-item>
+          <template v-else>
+            <el-menu-item :key="r.path" :index="r.path" @click="routerDo.push(r.path)">
+              <template #title>
+                <ImageIcon :img="r.meta.icon" :size="20"/>
+                <span>{{ r.meta.title }}</span>
+              </template>
+            </el-menu-item>
+          </template>
+        </template>
       </el-menu>
     </el-aside>
     <el-container>
       <el-header class="hidden-sm-and-up ">
         <el-menu
-            class="el-menu-demo"
+            router
             mode="horizontal"
+            class="el-menu-vertical-demo"
+            active-text-color="#ffffff"
         >
-          <el-menu-item v-for="menu in $router.getRoutes()" :key="menu.id" :index="menu.id" @click="$router.push(menu.path)">
-            <template #title>
-              <ImageIcon :img="menu.meta.icon" :size="20"/>
-              <span>{{ menu.meta.title }}</span>
+          <template v-for="r in routes">
+            <template v-if="r.children && r.children.length">
+              <el-sub-menu :key="r.path" :index="r.path">
+                <template #title>
+                  <ImageIcon :img="r.meta.icon" :size="20"/>
+                  <span> {{r.meta.title}} </span>
+                </template>
+                <div :key="c.path" v-for="c in r.children">
+                  <el-menu-item :key="c.path" :index="c.path" @click="routerDo.push(c.path)">
+                    <ImageIcon :img="c.meta.icon" :size="20"/>
+                    <span>{{ c.meta.title }}</span>
+                  </el-menu-item>
+                </div>
+              </el-sub-menu>
             </template>
-          </el-menu-item>
+            <template v-else>
+              <el-menu-item :key="r.path" :index="r.path" @click="routerDo.push(r.path)">
+                <template #title>
+                  <ImageIcon :img="r.meta.icon" :size="20"/>
+                  <span>{{ r.meta.title }}</span>
+                </template>
+              </el-menu-item>
+            </template>
+          </template>
         </el-menu>
       </el-header>
       <el-main>
@@ -68,6 +107,10 @@
   background-color: rgb(238, 241, 246);
 }
 
+.el-sub-menu {
+  background-color: rgb(238, 241, 246);
+}
+
 #logo {
   display: flex;
   justify-content: center;
@@ -88,8 +131,12 @@
 }
 </style>
 <script setup>
-import ImageIcon from "@/components/ImageIcon/ImageIcon.vue";
 import 'element-plus/theme-chalk/display.css'
+import ImageIcon from "@/components/ImageIcon/ImageIcon.vue";
+import router from "@/router";
+
+const routes = router.getRoutes().filter(r => r.meta.isMeme === false)
+const routerDo = router
 
 
 </script>

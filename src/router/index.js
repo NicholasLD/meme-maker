@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-//import {HomeFilled}  from '@element-plus/icons-vue'
+import memes from "@/router/memes";
 
 const routes = [
   {
@@ -10,27 +10,18 @@ const routes = [
     component: HomeView,
     meta: {
       title: '主页',
-      icon: require('../assets/icons/pop-cat.gif')
+      icon: require('../assets/icons/pop-cat.gif'),
+      isMeme: false
     }
   },
   {
-    id: 2,
-    path: '/long-1',
-    name: 'long-1',
-    component: () => import('../views/memes/Long-1.vue'),
+    path: '/memes',
+    name: 'memes',
+    children: memes,
     meta: {
-      title: '龙脸熊猫拿喇叭',
-      icon: require('../assets/icons/duck.gif')
-    }
-  },
-  {
-    id: 3,
-    path: '/smm-1',
-    name: 'smm-1',
-    component: () => import('../views/memes/Smm-1.vue'),
-    meta: {
-      title: '什么猫-干什么呢',
-      icon: require('../assets/icons/cat.gif')
+        title: '制作表情',
+        icon: require('../assets/icons/duck.gif'),
+        isMeme: false
     }
   },
   {
@@ -39,7 +30,18 @@ const routes = [
     component: () => import('../views/Disclaimer.vue'),
     meta: {
       title: '免责声明',
-      icon: require('../assets/icons/pop-cat-1.gif')
+      icon: require('../assets/icons/pop-cat-1.gif'),
+      isMeme: false
+    }
+  },
+  {
+    path: '/updatelog',
+    name: 'updatelog',
+    component: () => import('../views/UpdateLog.vue'),
+    meta: {
+        title: '更新日志',
+        icon: require('../assets/icons/pop-cat.gif'),
+        isMeme: false
     }
   }
 ]
