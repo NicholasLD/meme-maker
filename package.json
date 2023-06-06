@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "@vueuse/core": "^10.1.2",
     "core-js": "^3.8.3",
     "element-plus": "^2.3.6",
     "html2canvas": "^1.4.1",
