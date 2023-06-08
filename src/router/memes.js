@@ -19,6 +19,26 @@ const memes = [
             isMeme: true
         }
     },
+    {
+        path: '/memes/long-2',
+        name: 'long-2',
+        component: () => import('../views/memes/Long-2.vue'),
+        meta: {
+            title: '龙图-向上指',
+            icon: require('../assets/icons/duck.gif'),
+            isMeme: true
+        }
+    },
+    {
+        path: '/memes/long-3',
+        name: 'long-3',
+        component: () => import('../views/memes/Long-3.vue'),
+        meta: {
+            title: '龙图-向左指',
+            icon: require('../assets/icons/duck.gif'),
+            isMeme: true
+        }
+    }
 ]
 
 export default memes

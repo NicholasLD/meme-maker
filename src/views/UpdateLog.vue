@@ -4,6 +4,16 @@
 
 <template>
   <el-timeline>
+    <el-timeline-item timestamp="2023/6/9" placement="top">
+      <el-card>
+        <h4>更新内容：</h4>
+        <p>新表情：</p>
+        <ol>
+          <li>龙图-向上指（玩原神玩的）</li>
+          <li>龙图-向左指（发配到提瓦特）</li>
+        </ol>
+      </el-card>
+    </el-timeline-item>
     <el-timeline-item timestamp="2023/6/8" placement="top">
       <el-card>
         <h4>更新内容：</h4>

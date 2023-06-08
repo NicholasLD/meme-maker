@@ -24,6 +24,28 @@ export default createStore({
             height: 150,
             x: 80,
             y: 30,
+        },
+        {
+            id: 3,
+            name: '龙图-向上指',
+            url: require('../assets/memes/long-2.png'),
+            tags: ['龙图', '向上指', '龙图-向上指'],
+            description: '龙图-向上指',
+            width: 160,
+            height: 150,
+            x: 80,
+            y: 140,
+        },
+        {
+            id: 4,
+            name: '龙图-向左指',
+            url: require('../assets/memes/long-3.png'),
+            tags: ['龙图', '向左指', '龙图-向左指'],
+            description: '龙图-向左指',
+            width: 150,
+            height: 112,
+            x: 75,
+            y: 108,
         }
     ]
   },
