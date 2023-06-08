@@ -25,6 +25,16 @@ const routes = [
     }
   },
   {
+    path: '/makecustom',
+    name: 'makecustom',
+    component: () => import('../views/MakeCustom.vue'),
+    meta: {
+        title: '制作自定义表情 (Beta)',
+        icon: require('../assets/icons/duck.gif'),
+        isMeme: false
+    }
+  },
+  {
     path: '/disclaimer',
     name: 'disclaimer',
     component: () => import('../views/Disclaimer.vue'),
