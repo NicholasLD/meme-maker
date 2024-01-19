@@ -8,17 +8,17 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动项目（开发环境）
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 构建项目（生产环境）
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 代码格式检查
 ```
 npm run lint
 ```
